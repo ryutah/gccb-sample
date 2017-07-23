@@ -41,4 +41,4 @@ export PS1="(go:$GOENVNAME) $_OLD_PS1"
 export GOPATH=/Users/ryuta/gae:/Users/ryuta/gae/src/github.com/ryutah/$GOENVNAME
 export GOBIN=$GOPATH/bin
 export PATH="$GAEGO":"$GOBIN":"$GOROOT/bin":$PATH
-export GOROOT=/Users/ryuta/google-cloud-sdk/platform/google_appengine/goroot
+export GOROOT=/Users/ryuta/google-cloud-sdk/platform/google_appengine/goroot-1.6

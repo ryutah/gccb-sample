@@ -1,0 +1,6 @@
+package: .
+import:
+- package: google.golang.org/appengine
+  version: ^1.0.0
+  subpackages:
+  - log
