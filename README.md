@@ -24,4 +24,3 @@ $ docker build -t gcr.io/project-ryutah/deploy \
 
 # 注意点
 * プロジェクトルートに、サービスアカウントのキーファイルを配置してからコンテナのビルドをする
-* `cloudbuild.yaml`のイメージ名を、環境に合わせて変更する
