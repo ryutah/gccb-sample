@@ -1,0 +1,13 @@
+# Google Cloud Container Builder 公式イメージ
+# https://github.com/GoogleCloudPlatform/cloud-builders
+FROM gcr.io/cloud-builders/glide
+
+ENV GOPATH=$GOPATH:/workspace
+
+# GCCBのビルドステップ中は、各ステップの成果物やソースコードは全て `/workspace`
+# ディレクトリに保存され、ワークディレクトリが `/workspace` となるためローカル
+# でも同様の状態を再現するためにワークディレクトリを `/workspace` に設定しておく
+WORKDIR /workspace
+
+ENTRYPOINT ["sh"]
+CMD ["-c", "cd src && glide.bash install"]

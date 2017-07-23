@@ -1,4 +1,4 @@
-application: gccb-sample    # change here
+application: gccb-sample
 version: 1
 runtime: go
 api_version: go1

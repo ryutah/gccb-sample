@@ -1,0 +1,38 @@
+# Google Cloud Container Builder 公式イメージ
+# https://github.com/GoogleCloudPlatform/cloud-builders
+FROM gcr.io/cloud-builders/gcloud
+
+# デプロイ先のプロジェクト名
+ARG PROJECT_NAME
+# サービスアカウントのキーファイル名
+ARG KEY_FILE_NAME
+# サービスアカウントID
+ARG SERVICE_ACCOUNT_ID
+
+# デプロイ時の環境設定
+ENV APPLICATION=${PROJECT_NAME} \
+    GAE_GO_SDK_VERSION=1.9.56 \
+    ACCOUNT=${SERVICE_ACCOUNT_ID} \
+    KEY_FILE_NAME=${KEY_FILE_NAME} \
+    PATH=/go_appengine:$PATH \
+    GOPATH=/workspace
+
+# サービスアカウントのキーファイルを、Dockerコンテナ内にコピーする
+COPY ${KEY_FILE_NAME} /${KEY_FILE_NAME}
+
+RUN apt-get update && apt-get install -y \
+    wget \
+    unzip \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+# AppEngine SDK For Go のインストール
+RUN wget https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-${GAE_GO_SDK_VERSION}.zip \
+ && unzip /go_appengine_sdk_linux_amd64-${GAE_GO_SDK_VERSION}.zip \
+ && rm /go_appengine_sdk_linux_amd64-${GAE_GO_SDK_VERSION}.zip
+
+WORKDIR ${GOPATH}
+
+# デプロイスクリプトの実行
+ENTRYPOINT ["sh"]
+CMD ["deploy.sh"]

@@ -74,3 +74,4 @@ appengine-generated/
 vendor/
 activate
 pkg/
+*.json
